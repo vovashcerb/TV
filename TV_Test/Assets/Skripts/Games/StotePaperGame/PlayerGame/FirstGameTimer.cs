@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class FirstGameTimer : MonoBehaviour
 {
@@ -26,6 +27,13 @@ public class FirstGameTimer : MonoBehaviour
 
     [Header("Таймер")]
     public TMP_Text timer;
+
+
+    [Header("Счетчик раундов")]
+
+    public int loose = 0;
+    public int raunds = 0;
+    public int wins = 0;
 
 
     void Update()
@@ -122,10 +130,12 @@ public class FirstGameTimer : MonoBehaviour
             else if(enemy == Types.Stone)
             {
                 Debug.Log("Поражение");
+                loose++;
             }
             else
             {
                 Debug.Log("Победа");
+                wins++;
             }
        }
 
@@ -138,10 +148,12 @@ public class FirstGameTimer : MonoBehaviour
             else if (enemy == Types.scissors)
             {
                 Debug.Log("Победа");
+                wins++;
             }
             else
             {
                 Debug.Log("Поражение");
+                loose++;
             }
         }
 
@@ -154,14 +166,16 @@ public class FirstGameTimer : MonoBehaviour
             else if (enemy == Types.Stone)
             {
                 Debug.Log("Победа");
+                wins++;
             }
             else
             {
                 Debug.Log("Поражение");
+                loose++;
             }
         }
 
-
+        raunds++;
         ResetGame();
     }
 
