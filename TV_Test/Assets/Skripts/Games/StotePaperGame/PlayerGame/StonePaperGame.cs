@@ -41,6 +41,20 @@ public class StonePaperGame : MonoBehaviour
         }
         isSecondRound = true;
     }
+
+
+    public void ResetButtons()
+    {
+        isSecondRound = false;
+        for (int i = 0;i < PaperStoneButton.Count;i++)
+        {
+            PaperStoneButton[i].gameObject.SetActive(true);
+            PaperStoneButton[i].state = 1;
+            PaperStoneButton[i].ChooseButton(PaperStoneButton[i].types);
+        }
+        StaticHolder.Instance.PaperStoneButtonSecond.Clear();
+        Debug.Log("Resetting");
+    }
 }
 
 public enum Types

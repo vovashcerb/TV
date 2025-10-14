@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using TMPro;
 
 public class FirstGameTimer : MonoBehaviour
 {
@@ -19,10 +20,26 @@ public class FirstGameTimer : MonoBehaviour
     [Header("Выбор игрока")]
     public Transform playerChoise;
 
+    [Header("Что ресетнуть")]
+    public GameObject RPC;
+    public GameObject bigEcran;
+
+    [Header("Таймер")]
+    public TMP_Text timer;
+
+
     void Update()
     {
         time += Time.deltaTime;
-        if(time > porogy.x && !isSecondRaund)
+        if (!isSecondRaund)
+        {
+            timer.text = "R1 Time" + (porogy.x - (int)time).ToString();
+        }
+        else
+        {
+            timer.text = "R2 Time" + (porogy.y - (int)time).ToString();
+        }
+        if (time > porogy.x && !isSecondRaund)
         {
             time = 0f;
             isSecondRaund = true;
@@ -32,7 +49,7 @@ public class FirstGameTimer : MonoBehaviour
             gamePaper.Add((Types)Random.Range(0, System.Enum.GetValues(typeof(Types)).Length));
             gamePaper.Add((Types)Random.Range(0, System.Enum.GetValues(typeof(Types)).Length));
 
-            GameObject firstChoise =  Instantiate(buttonPreafab, botChoise[0].position, botChoise[0].rotation, botChoise[0]);
+            GameObject firstChoise = Instantiate(buttonPreafab, botChoise[0].position, botChoise[0].rotation, botChoise[0]);
             firstChoise.GetComponent<PaperStoneButton>().types = gamePaper[0];
             firstChoise.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = gamePaper[0].ToString();
 
@@ -52,7 +69,7 @@ public class FirstGameTimer : MonoBehaviour
 
 
         }
-        else if(time > porogy.y && isSecondRaund)
+        else if (time > porogy.y && isSecondRaund)
         {
             for (int i = 0; i < StaticHolder.Instance.PaperStoneButtonSecond.Count; i++)
             {
@@ -60,7 +77,8 @@ public class FirstGameTimer : MonoBehaviour
                 if (StaticHolder.Instance.PaperStoneButtonSecond[i].state == 1)
                 {
                     _choosingButton = StaticHolder.Instance.PaperStoneButtonSecond[i];
-                    ChooseWinner(_choosingButton.types, gamePaper[Random.Range(0,3)]);
+                    //StartCoroutine(ChooseWinner(_choosingButton.types, gamePaper[Random.Range(0,2)]));
+                    ChooseWinner(_choosingButton.types, gamePaper[Random.Range(0, 2)]);
                     break;
                 }
             }
@@ -88,6 +106,12 @@ public class FirstGameTimer : MonoBehaviour
             }
         }
 
+        //////
+        //////
+        ///yield return new WaitForSeconds(2);
+        //////
+        //////
+
         Debug.Log(player + "  " + enemy);
        if (player == Types.scissors)
        {
@@ -103,7 +127,6 @@ public class FirstGameTimer : MonoBehaviour
             {
                 Debug.Log("Победа");
             }
-            return;
        }
 
         if (player == Types.Stone)
@@ -120,7 +143,6 @@ public class FirstGameTimer : MonoBehaviour
             {
                 Debug.Log("Поражение");
             }
-            return;
         }
 
         if (player == Types.Paper)
@@ -137,7 +159,26 @@ public class FirstGameTimer : MonoBehaviour
             {
                 Debug.Log("Поражение");
             }
-            return;
         }
+
+
+        ResetGame();
+    }
+
+    private void ResetGame()
+    {
+        time = 0;
+        isSecondRaund = false;
+        gamePaper_Left.ResetButtons();
+        gamePaper_Right.ResetButtons();
+        Destroy(playerChoise.GetChild(0).gameObject);
+        Destroy(playerChoise.GetChild(1).gameObject);
+        Destroy(botChoise[0].GetChild(0).gameObject);
+        Destroy(botChoise[0].GetChild(1).gameObject);
+        gamePaper.Clear();
+        //Instantiate(RPC, RPC.transform.position, RPC.transform.rotation);
+        //Instantiate(bigEcran, bigEcran.transform.position, bigEcran.transform.rotation);
+        //Instantiate(gameObject, gameObject.transform.position, gameObject.transform.rotation);
     }
 }
+
