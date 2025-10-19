@@ -3989,6 +3989,10 @@ MonoBehaviour:
   RPC: {fileID: 2046873726}
   bigEcran: {fileID: 1560288907}
   timer: {fileID: 1442993188}
+  loose: 0
+  raunds: 0
+  wins: 0
+  hp: 5
 --- !u!4 &1624151472
 Transform:
   m_ObjectHideFlags: 0

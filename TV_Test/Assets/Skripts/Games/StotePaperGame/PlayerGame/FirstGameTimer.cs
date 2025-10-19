@@ -34,6 +34,7 @@ public class FirstGameTimer : MonoBehaviour
     public int loose = 0;
     public int raunds = 0;
     public int wins = 0;
+    public int hp = 3;
 
 
     void Update()
@@ -41,11 +42,11 @@ public class FirstGameTimer : MonoBehaviour
         time += Time.deltaTime;
         if (!isSecondRaund)
         {
-            timer.text = "R1 Time" + (porogy.x - (int)time).ToString();
+            timer.text = "R1 Time: " + (porogy.x - (int)time).ToString();
         }
         else
         {
-            timer.text = "R2 Time" + (porogy.y - (int)time).ToString();
+            timer.text = "R2 Time: " + (porogy.y - (int)time).ToString();
         }
         if (time > porogy.x && !isSecondRaund)
         {
@@ -131,6 +132,10 @@ public class FirstGameTimer : MonoBehaviour
             {
                 Debug.Log("Поражение");
                 loose++;
+                if (loose != 0 && loose % 3 == 0)
+                {
+                    hp--;
+                }
             }
             else
             {
@@ -154,6 +159,10 @@ public class FirstGameTimer : MonoBehaviour
             {
                 Debug.Log("Поражение");
                 loose++;
+                if (loose != 0 && loose % 3 == 0)
+                {
+                    hp--;
+                }
             }
         }
 
@@ -172,8 +181,13 @@ public class FirstGameTimer : MonoBehaviour
             {
                 Debug.Log("Поражение");
                 loose++;
+                if(loose != 0 && loose%3 == 0)
+                {
+                    hp--;
+                }
             }
         }
+
 
         raunds++;
         ResetGame();
@@ -194,5 +208,8 @@ public class FirstGameTimer : MonoBehaviour
         //Instantiate(bigEcran, bigEcran.transform.position, bigEcran.transform.rotation);
         //Instantiate(gameObject, gameObject.transform.position, gameObject.transform.rotation);
     }
+
+
+    //до начала игры умы продумываем какие предметы ввыбрать и какие баффы выбрать
 }
 
