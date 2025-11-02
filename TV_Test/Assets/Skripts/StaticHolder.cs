@@ -14,4 +14,6 @@ public class StaticHolder : MonoBehaviour
     public Color unChuusingColor;
 
     public int Game_1_Raund;
+
+    public bool isGameStarted = false;
 }
