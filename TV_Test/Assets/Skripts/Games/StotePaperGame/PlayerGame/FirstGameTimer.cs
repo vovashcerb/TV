@@ -63,6 +63,7 @@ public class FirstGameTimer : MonoBehaviour
 
         if (time > porogy.x && !isSecondRaund)
         {
+            isCalculating = true;
             SetToSecondRaund();
         }
         else if (time > porogy.y && isSecondRaund)
@@ -164,7 +165,6 @@ public class FirstGameTimer : MonoBehaviour
                 PlayerLoose();
             }
         }
-        isCalculating = true;
         StartCoroutine(ResetGame());
     }
 
@@ -272,7 +272,9 @@ public class FirstGameTimer : MonoBehaviour
         
     }
     //до начала игры умы продумываем какие предметы ввыбрать и какие баффы выбрать
-    //
+    //ХП - это лампочки, переделать Хп бар
+    //Пустое поражение,сделать чтобы если не выбрал предмет то кпка быстрого старта не нажималась
+    //Анимация для кнопки, для игрока
     //
 }
 
