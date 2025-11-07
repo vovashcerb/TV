@@ -164,7 +164,7 @@ public class FirstGameTimer : MonoBehaviour
                 PlayerLoose();
             }
         }
-
+        isCalculating = true;
         StartCoroutine(ResetGame());
     }
 
@@ -197,6 +197,7 @@ public class FirstGameTimer : MonoBehaviour
             gamePaper_Right.ClearNotChoosing();
         if (StaticHolder.Instance.PaperStoneButtonSecond.Count == 2)
         {
+            time = 0;
             gamePaper.Add((Types)Random.Range(0, System.Enum.GetValues(typeof(Types)).Length));
             gamePaper.Add((Types)Random.Range(0, System.Enum.GetValues(typeof(Types)).Length));
 
@@ -271,5 +272,7 @@ public class FirstGameTimer : MonoBehaviour
         
     }
     //до начала игры умы продумываем какие предметы ввыбрать и какие баффы выбрать
+    //
+    //
 }
 
